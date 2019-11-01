@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  apache:
+    image: php:7.2-apache
+    volumes:
+      - ../src:/var/www/html:delegated
+    ports:
+      - 8080:80
+  cli:
+    depends_on:
+      - apache
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    volumes:
+      - ../src:/app:delegated
